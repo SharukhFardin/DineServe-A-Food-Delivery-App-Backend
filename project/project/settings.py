@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'order',
     'restaurant',
     'shared',
+    "rest_framework",
+    'simple_history',
 ]
+
+# Set base auth user model
+AUTH_USER_MODEL = "account.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
