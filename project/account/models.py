@@ -11,8 +11,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 from simple_history.models import HistoricalRecords
 
 from shared.models import BaseModelWithUID
+from shared.choices import StatusChoices
 
-from .choices import UserStatus
 from .managers import CustomUserManager
 from .utils import get_slug_full_name
 
@@ -27,9 +27,9 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModelWithUID):
     address = models.TextField(blank=True, null=True)
     status = models.CharField(
         max_length=20,
-        choices=UserStatus.choices,
+        choices=StatusChoices.choices,
         db_index=True,
-        default=UserStatus.ACTIVE,
+        default=StatusChoices.ACTIVE,
     )
     is_staff = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -59,14 +59,14 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModelWithUID):
         return name.strip()
 
     def activate(self):
-        self.status = UserStatus.ACTIVE
+        self.status = StatusChoices.ACTIVE
         self.save_dirty_fields()
 
     def deactivate(self):
-        self.status = UserStatus.INACTIVE
+        self.status = StatusChoices.INACTIVE
         self.save_dirty_fields()
 
     def removed(self):
-        self.status = UserStatus.REMOVED
+        self.status = StatusChoices.REMOVED
         self.is_active = False
         self.save_dirty_fields()

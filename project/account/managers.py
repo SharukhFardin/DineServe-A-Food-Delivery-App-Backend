@@ -4,12 +4,12 @@ from django.utils.translation import gettext_lazy as _
 
 from rest_framework.exceptions import ValidationError
 
-from .choices import UserStatus
+from shared.choices import StatusChoices
 
 
 class UserQuerySet(QuerySet):
     def get_status_active(self):
-        return self.filter(status=UserStatus.ACTIVE)
+        return self.filter(status=StatusChoices.ACTIVE)
 
 
 class CustomUserManager(BaseUserManager):
