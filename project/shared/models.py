@@ -1,5 +1,7 @@
 import uuid
 
+from autoslug import AutoSlugField
+
 from dirtyfields import DirtyFieldsMixin
 
 from django.db import models
@@ -19,3 +21,11 @@ class BaseModelWithUID(DirtyFieldsMixin, models.Model):
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now()
         super().save(*args, **kwargs)
+
+
+class BaseModelWithUidAndSlug(BaseModelWithUID):
+    slug = AutoSlugField(populate_from='name', unique=True, always_update=False)
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        abstract = True
