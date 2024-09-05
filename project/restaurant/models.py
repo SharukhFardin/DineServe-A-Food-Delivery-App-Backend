@@ -76,7 +76,7 @@ class RestaurantStaff(models.Model):
     history = HistoricalRecords()
 
     def __str__(self):
-        return f"{self.user.name} - {self.role} at {self.restaurant.name}"
+        return f"{self.user.get_name()} - {self.role} at {self.restaurant.name}"
 
 
 class RestaurantAddress(BaseModelWithUID):
