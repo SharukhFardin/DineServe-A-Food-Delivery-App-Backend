@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -9,6 +9,9 @@ from drf_spectacular.views import (
 urlpatterns = [
     # Django Admin
     path("admin/", admin.site.urls),
+    # User related APIs
+    # path("api/v1/accounts/", include("account.rest.urls.user")),
+    path("api/v1/me/", include("account.rest.urls.me")),
     # Swagger
     path("api/schema", SpectacularAPIView.as_view(), name="schema"),
     path(
