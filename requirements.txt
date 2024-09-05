@@ -1,5 +1,5 @@
 # Here all the packages required to run the project are listed with their versions.
-# We need to read and install these packages before running the project.
+# We need to read and install these packages before running our project.
 # ---------------------------------------------------------------------------------
 
 Django==5.1
